@@ -29,7 +29,7 @@
 #include <hardware/sensors.h>
 #include <hardware/sensors-base.h>
 
-#include "custom-libiio-client/iio.h"
+#include "iio.h"
 
 #define MAX_SENSOR 9
 

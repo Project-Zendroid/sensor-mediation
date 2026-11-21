@@ -58,14 +58,13 @@ iioClient::~iioClient()
 
 int iioClient::init(void)
 {
-    char value[PROPERTY_VALUE_MAX] = {0};
 
     ctx = NULL;
     sensorCount = 0;
-    property_get("vendor.intel.ipaddr", value, " ");
-    ctx = iio_create_network_context(value);
+
+    ctx = iio_create_local_context();
     if (!ctx) {
-        ALOGE("Sensor: Error in Initializing IIO Client with N/W backend\n");
+        ALOGE("Sensor: Error initializing local IIO context\n");
         return -1;
     }
 
@@ -158,7 +157,7 @@ int iioClient::compare(const char *name)
 }
 
 /*
- * Receives sensor data from server
+ * Reads sensor data from local kernel IIO devices
  */
 int iioClient::getPollData(sensors_event_t* data)
 {

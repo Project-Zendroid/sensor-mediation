@@ -13,24 +13,15 @@ ifeq ($(MEDIATION_HAL_DISABLE_STATIC_SENSOR_LIST), true)
 LOCAL_CFLAGS += -DDISABLE_STATIC_SENSOR_LIST
 endif
 
-LOCAL_SRC_FILES := sensor_hal.cpp iio-client.cpp \
-                    custom-libiio-client/xml.c \
-                    custom-libiio-client/buffer.c \
-                    custom-libiio-client/context.c \
-                    custom-libiio-client/iiod-client.c \
-                    custom-libiio-client/lock.c \
-                    custom-libiio-client/channel.c \
-                    custom-libiio-client/backend.c \
-                    custom-libiio-client/device.c \
-                    custom-libiio-client/utilities.c \
-                    custom-libiio-client/network.c
+LOCAL_SRC_FILES := sensor_hal.cpp iio-client.cpp
+LOCAL_STATIC_LIBRARIES := intel.sensors.libiio
 
 LOCAL_SHARED_LIBRARIES := liblog libc libdl libxml2 libcutils
 LOCAL_HEADER_LIBRARIES += libutils_headers libhardware_headers
 
 LOCAL_CFLAGS += -Wno-unused-variable -Wno-unused-parameter -Wno-unused-function
 
-LOCAL_C_INCLUDES := $(LOCAL_PATH) $(LOCAL_PATH)/custom-libiio-client
+LOCAL_C_INCLUDES := $(LOCAL_PATH)
 
 include $(BUILD_SHARED_LIBRARY)
 
